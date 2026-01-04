@@ -23,12 +23,11 @@ module Edward
     end
     
     def visit_file path
-      content = File.read(path)
-      if content.start_with? "---"
+      if Convertible.convertible?(path)
         convertible = Edward::Convertible.new(path)
         puts "converting #{convertible.path} => #{convertible.dirname}/#{convertible.new_name}"
         FileUtils.mkdir_p "#{@target}/#{convertible.dirname}"
-        File.write("#{@target}/#{convertible.dirname}/#{convertible.new_name}", convertible.convert)
+        File.write("#{@target}/#{convertible.new_path}", convertible.convert)
       else
         copy_plain path
       end

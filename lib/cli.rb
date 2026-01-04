@@ -11,8 +11,15 @@ module Edward
   
     def serve
       require "webrick"
-      server = WEBrick::HTTPServer.new :Port => 3000, :DocumentRoot => @builder.target
+      server = WEBrick::HTTPServer.new :Port => 3001, :DocumentRoot => @builder.target
       server.start
+    end
+    
+    def init
+      require "fileutils"
+      FileUtils.mkdir_p "_include"
+      FileUtils.mkdir_p "_layouts"
+      File.write(".gitignore", "_site")
     end
   end
 end

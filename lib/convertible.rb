@@ -3,8 +3,8 @@ module Edward
   class Convertible
     YAML_FRONT_MATTER_REGEXP = %r!\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)!m.freeze
 
-    attr_reader :path, :layout
-    
+    attr_reader :path, :layout, :yaml
+
     def initialize path, locals = {}, &block
       @path = path
       @locals = locals || {}
@@ -13,6 +13,11 @@ module Edward
       @yaml, @content = Convertible.extract_front_matter(content)
       @template = Tilt[path].new { @content }
       @layout = get_layout(@yaml&.dig(:layout))
+    end
+    
+    # check if a file starts with yaml doc and can be mapped by tilt
+    def self.convertible? path
+      !Tilt.templates_for(path).empty? && YAML_FRONT_MATTER_REGEXP.match(File.read(path))
     end
 
     def render
@@ -50,6 +55,14 @@ module Edward
     
     def dirname
       File.dirname(@path)
+    end
+    
+    def new_path
+      "#{dirname}/#{new_name}"
+    end
+    
+    def tag? tag
+      @yaml&.dig(:tags)&.include? tag
     end
     
   end

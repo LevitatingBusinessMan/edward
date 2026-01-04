@@ -10,19 +10,27 @@
       th Size
       th Type
     - for entry in Dir["#{@me.dirname}/*"]
+        ruby: 
+          directory = File.directory? entry
+          time = File.mtime(entry)
+          size = File.size(entry)
+          mime = if directory
+              "Directory"
+            else
+              MimeMagic.by_magic(File.open(entry)) || MimeMagic.by_path(entry) || "application/octet-stream"
+          end
+
+          if Edward::Convertible.convertible?(entry)
+            entry = Edward::Convertible.new(entry).new_name
+            mime = MimeMagic.by_path(entry) || "application/octet-stream"
+          end
+
+          decorated = File.basename(entry) + (directory ? "/" : "")
         tr
-            ruby:
-              decorated = File.basename(entry) + (File.directory?(entry) ? "/" : "")
             td: a[href=decorated]= decorated
-            td: span= File.mtime(entry)
-            td.size: span= "#{(File.size(entry) / 1024.0).round(1)}K"
-            - if File.directory? entry
-              td: span="Directory"
-            - else
-              - begin
-                td: span=(MimeMagic.by_magic(File.open(entry)) || MimeMagic.by_path(entry) || "application/octet-stream")
-              - rescue => ex
-                pre= ex.message
+            td: span= time
+            td.size: span= "#{(size / 1024.0).round(1)}K"
+            td: span= mime
 
 css:
   .file_index {

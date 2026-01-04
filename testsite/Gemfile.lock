@@ -8,6 +8,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    asciidoctor (2.0.26)
     mimemagic (0.4.3)
       nokogiri (~> 1)
       rake
@@ -27,6 +28,7 @@ PLATFORMS
   x86_64-linux-gnu
 
 DEPENDENCIES
+  asciidoctor (~> 2.0)
   edward!
   mimemagic (~> 0.4.3)
   pandoc-ruby (~> 2.1)

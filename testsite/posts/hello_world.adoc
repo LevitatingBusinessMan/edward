@@ -2,6 +2,7 @@
 layout: post
 locals:
   title: Hello World Post
+tags: [post_index]
 ---
 = Hello World!!!
 
