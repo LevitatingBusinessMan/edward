@@ -1,0 +1,5 @@
+doctype html
+html
+  head
+    style == include "style.css.str", background_color: local[:background_color] || "red"
+  body == yield

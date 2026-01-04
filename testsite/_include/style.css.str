@@ -1,0 +1,9 @@
+#{
+  if false
+    '* {color: red}'
+  end
+}
+
+body {
+  background-color: '#{local[:background_color]}';
+}

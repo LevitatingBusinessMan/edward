@@ -1,0 +1,27 @@
+PATH
+  remote: ..
+  specs:
+    edward (0.0.0)
+      tilt (~> 2.6)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    pandoc-ruby (2.1.10)
+    slim (5.2.1)
+      temple (~> 0.10.0)
+      tilt (>= 2.1.0)
+    temple (0.10.4)
+    tilt (2.6.1)
+
+PLATFORMS
+  ruby
+  x86_64-linux-gnu
+
+DEPENDENCIES
+  edward!
+  pandoc-ruby (~> 2.1)
+  slim (~> 5.2)
+
+BUNDLED WITH
+   2.6.9
