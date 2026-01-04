@@ -5,8 +5,8 @@ h1 Post index
 hr
 ul
   - for entry in Dir["#{@me.dirname}/*"]
-    - if Edward::Convertible.convertible?(entry)
+    - if Edward::Page.page?(entry)
       ruby:
-        post = Edward::Convertible.new(entry)
+        post = Edward::Page.new(entry)
       - if post.tag? "post_index"
         li: a[href="/#{post.new_path}"]: span= post.yaml[:locals][:title]

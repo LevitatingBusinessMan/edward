@@ -1,6 +1,6 @@
 module Edward
   # represents a file that may be converted
-  class Convertible
+  class Page
     YAML_FRONT_MATTER_REGEXP = %r!\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)!m.freeze
 
     attr_reader :path, :layout, :yaml
@@ -10,13 +10,13 @@ module Edward
       @locals = locals || {}
       @block = block
       content = File.read(path)
-      @yaml, @content = Convertible.extract_front_matter(content)
+      @yaml, @content = Page.extract_front_matter(content)
       @template = Tilt[path].new { @content }
       @layout = get_layout(@yaml&.dig(:layout))
     end
     
     # check if a file starts with yaml doc and can be mapped by tilt
-    def self.convertible? path
+    def self.page? path
       !Tilt.templates_for(path).empty? && YAML_FRONT_MATTER_REGEXP.match(File.read(path))
     end
 
@@ -44,7 +44,7 @@ module Edward
     
     def get_layout name
       if File.exist? "_layouts/#{name}.slim"
-        Convertible.new("_layouts/#{name}.slim", @yaml&.dig(:locals)) { render }
+        Page.new("_layouts/#{name}.slim", @yaml&.dig(:locals)) { render }
       end
     end
     

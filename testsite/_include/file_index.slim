@@ -20,8 +20,8 @@
               MimeMagic.by_magic(File.open(entry)) || MimeMagic.by_path(entry) || "application/octet-stream"
           end
 
-          if Edward::Convertible.convertible?(entry)
-            entry = Edward::Convertible.new(entry).new_name
+          if Edward::Page.page?(entry)
+            entry = Edward::Page.new(entry).new_name
             mime = MimeMagic.by_path(entry) || "application/octet-stream"
           end
 
