@@ -10,11 +10,12 @@ module Edward
     
     def initialize
       @target = "_site"
-      FileUtils.rm_r @target if File.exist? @target
-      FileUtils.mkdir_p @target
     end
     
     def start
+      FileUtils.rm_r @target if File.exist? @target
+      FileUtils.mkdir_p @target
+
       Dir.glob("**/*") do |path|
         visit_file path if File.file?(path) &&
           !path.start_with?("_") &&
@@ -38,26 +39,6 @@ module Edward
       FileUtils.mkdir_p "#{@target}/#{File.dirname path}"
       FileUtils.cp path, "#{@target}/#{path}"
     end
-    
-    # def convert path, yaml, content
-    #   if (template = Tilt[path])
-    #     template = template.new { content }
-    #     converted = template.render(self)
-    #     if (layout = get_layout(yaml[:layout]))
-    #       layout.render(RenderContext.new, yaml[:locals]) { converted }
-    #     else
-    #       converted
-    #     end
-    #   else
-    #     raise "no engine mapped for #{path}"
-    #   end
-    # end
-    
-    # def get_layout name
-    #   if File.exist? "_layouts/#{name}.slim"
-    #     return Tilt.new("_layouts/#{name}.slim")
-    #   end
-    # end
     
   end
 end

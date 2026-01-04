@@ -11,8 +11,19 @@ module Edward
   
     def serve
       require "webrick"
-      server = WEBrick::HTTPServer.new :Port => 3001, :DocumentRoot => @builder.target
-      server.start
+      @server = WEBrick::HTTPServer.new :Port => 3000, :DocumentRoot => @builder.target
+      trap("INT") { @server.shutdown }
+      listen
+      puts "visit edward at http://127.0.0.1:#{@server.config[:Port]}"
+      @server.start
+    end
+    
+    def listen
+      require "listen"
+      Listen.to('.', ignore: /_site/) { |modified, added, removed|
+        puts "rebuilding"
+        @builder.start
+      }.start
     end
     
     def init
