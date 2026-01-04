@@ -9,3 +9,5 @@ gem "edward", path: ".."
 gem "slim", "~> 5.2"
 
 gem "pandoc-ruby", "~> 2.1"
+
+gem "mimemagic", "~> 0.4.3"

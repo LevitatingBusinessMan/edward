@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'edward'
+Edward::CLI.new.main

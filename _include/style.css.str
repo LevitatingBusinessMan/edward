@@ -1,9 +1,0 @@
-#{
-  if false
-    '* {color: red}'
-  end
-}
-
-body {
-  background-color: '#{background_color}';
-}

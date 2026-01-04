@@ -1,0 +1,35 @@
+.file_index
+  ruby:
+    require 'mimemagic'
+  hr
+  h1 Index of #{File.expand_path("/", @me.dirname)}
+  table
+    tr
+      th Name
+      th Last Modified
+      th Size
+      th Type
+    - for entry in Dir["#{@me.dirname}/*"]
+        tr
+            ruby:
+              decorated = File.basename(entry) + (File.directory?(entry) ? "/" : "")
+            td: a[href=decorated]= decorated
+            td: span= File.mtime(entry)
+            td.size: span= "#{(File.size(entry) / 1024.0).round(1)}K"
+            - if File.directory? entry
+              td: span="Directory"
+            - else
+              - begin
+                td: span=(MimeMagic.by_magic(File.open(entry)) || MimeMagic.by_path(entry) || "application/octet-stream")
+              - rescue => ex
+                pre= ex.message
+
+css:
+  .file_index {
+    th, td {
+      padding-right: 10px;
+    }
+    td.size {
+      text-align: right;
+    }
+  }

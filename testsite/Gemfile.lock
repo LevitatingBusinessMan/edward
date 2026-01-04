@@ -3,23 +3,32 @@ PATH
   specs:
     edward (0.0.0)
       tilt (~> 2.6)
+      webrick (~> 1.9)
 
 GEM
   remote: https://rubygems.org/
   specs:
+    mimemagic (0.4.3)
+      nokogiri (~> 1)
+      rake
+    nokogiri (1.19.0-x86_64-linux-gnu)
+      racc (~> 1.4)
     pandoc-ruby (2.1.10)
+    racc (1.8.1)
+    rake (13.3.1)
     slim (5.2.1)
       temple (~> 0.10.0)
       tilt (>= 2.1.0)
     temple (0.10.4)
     tilt (2.6.1)
+    webrick (1.9.2)
 
 PLATFORMS
-  ruby
   x86_64-linux-gnu
 
 DEPENDENCIES
   edward!
+  mimemagic (~> 0.4.3)
   pandoc-ruby (~> 2.1)
   slim (~> 5.2)
 

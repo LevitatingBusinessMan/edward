@@ -5,5 +5,5 @@
 }
 
 body {
-  background-color: '#{local[:background_color]}';
+  background-color: #{local[:background_color]};
 }
