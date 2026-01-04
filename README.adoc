@@ -1,0 +1,10 @@
+= Edward, a simple robust static site generator for Ruby
+
+```
+// _layouts/default.slim
+doctype html
+html
+  head
+    style == include "style.css.str", background_color: "red"
+  body == yield
+```
