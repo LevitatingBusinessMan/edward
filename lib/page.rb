@@ -13,6 +13,9 @@ module Edward
       @yaml, @content = Page.extract_front_matter(content)
       @template = Tilt[path].new { @content }
       @layout = get_layout(@yaml&.dig(:layout))
+      # layout notes:
+      # prob best course of action is to grab the layout frontmatter
+      # merge it with the page's frontmatter, and then add the template to a stack
     end
     
     # check if a file starts with yaml doc and can be mapped by tilt
