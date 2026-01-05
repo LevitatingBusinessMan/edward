@@ -69,7 +69,7 @@ module Edward
     end
 
     def [](*keys)
-      @yaml.dig(*keys)
+      @yaml&.dig(*keys)
     end
     
   end
