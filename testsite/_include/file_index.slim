@@ -2,14 +2,14 @@
   ruby:
     require 'mimemagic'
   hr
-  h1 Index of #{File.expand_path("/", @me.dirname)}
+  h1 Index of #{File.expand_path("/", @page.dirname)}
   table
     tr
       th Name
       th Last Modified
       th Size
       th Type
-    - for entry in Dir["#{@me.dirname}/*"]
+    - for entry in Dir["#{@page.dirname}/*"]
         ruby: 
           directory = File.directory? entry
           time = File.mtime(entry)

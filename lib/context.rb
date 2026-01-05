@@ -1,8 +1,8 @@
 module Edward
   # Context for a template to run in
   class RenderContext
-    def initialize convertible
-      @me = convertible
+    def initialize page
+      @page = page
     end
 
     def include file, locals = {}
