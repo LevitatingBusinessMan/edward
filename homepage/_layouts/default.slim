@@ -1,6 +1,10 @@
 doctype html
 html
-head
-  title = @page[:title]
-  link rel="stylesheet" href="assets/style.css"
+  head
+    title = @page[:title]
+    link rel="stylesheet" href="assets/style.css"
+    ruby:
+      require "pygments"
+      require "asciidoctor"
+    style == Asciidoctor::SyntaxHighlighter.for('pygments').read_stylesheet('default')
 body == yield
