@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+gem "edward", path: ".."
+
+gem "slim", "~> 5.2"
+
+gem "asciidoctor", "~> 2.0"
+
+gem "pygments.rb", "~> 4.0"

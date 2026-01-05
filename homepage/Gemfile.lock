@@ -1,0 +1,38 @@
+PATH
+  remote: ..
+  specs:
+    edward (0.0.0)
+      listen (~> 3.9)
+      tilt (~> 2.6)
+      webrick (~> 1.9)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    asciidoctor (2.0.26)
+    ffi (1.17.3-x86_64-linux-gnu)
+    listen (3.9.0)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
+    pygments.rb (4.0.0)
+    rb-fsevent (0.11.2)
+    rb-inotify (0.11.1)
+      ffi (~> 1.0)
+    slim (5.2.1)
+      temple (~> 0.10.0)
+      tilt (>= 2.1.0)
+    temple (0.10.4)
+    tilt (2.6.1)
+    webrick (1.9.2)
+
+PLATFORMS
+  x86_64-linux-gnu
+
+DEPENDENCIES
+  asciidoctor (~> 2.0)
+  edward!
+  pygments.rb (~> 4.0)
+  slim (~> 5.2)
+
+BUNDLED WITH
+   2.7.2

@@ -10,7 +10,7 @@ module Edward
     
     def initialize
       @target = "_site"
-      @gitignore = File.read(".gitignore").lines
+      @gitignore = File.read(".gitignore").lines rescue []
     end
     
     def start
