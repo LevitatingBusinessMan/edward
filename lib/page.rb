@@ -67,6 +67,10 @@ module Edward
     def tag? tag
       @yaml&.dig(:tags)&.include? tag
     end
+
+    def [](*keys)
+      @yaml.dig(*keys)
+    end
     
   end
 end
