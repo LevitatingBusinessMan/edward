@@ -1,10 +1,44 @@
 = Edward, a simple robust static site generator for Ruby
 
+Edward is inspired by Jekyll (Edward Hyde is the name of Dr Jekyll's alter ego). However, Edward uses Tilt for templating instead of Liquid. The freedom provided by Tilt as well as Edwards simplicity create a very powerful environment.
+
+At its core Edward only does one thing, given a website it will convert certain template files (called "pages") to .html files. It has a concept of layouts and include partials, but nothing else. Other functionality may be implemented by hand.
+
+Ruby has some very powerful templating engines like Slim, Haml and Erb. This project tries to leverage these tools as much as possible. 
+
+== Getting started
+
+(wip, not published yet)
+
+```sh
+gem install mr-edward
+edward serve
 ```
+
+== Layouts
+
+
+```slim
 // _layouts/default.slim
 doctype html
 html
   head
-    style == include "style.css.str", background_color: "red"
+    title = @page[:title]
+    style == include "style.css.str", background_color: @page[:style, :background_color] || "red"
   body == yield
 ```
+
+== Include
+```css
+/* _include/style.css.str */
+#{
+  if local[:red_text]
+    '* {color: red}'
+  end
+}
+
+body {
+  background-color: #{local[:background_color]};
+}
+```
+
