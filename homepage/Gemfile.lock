@@ -2,6 +2,7 @@ PATH
   remote: ..
   specs:
     edward (0.0.0)
+      deep_merge (~> 1.2)
       listen (~> 3.9)
       tilt (~> 2.6)
       webrick (~> 1.9)
@@ -10,6 +11,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     asciidoctor (2.0.26)
+    deep_merge (1.2.2)
     ffi (1.17.3-x86_64-linux-gnu)
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)

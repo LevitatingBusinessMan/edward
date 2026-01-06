@@ -1,3 +1,6 @@
 ---
 ---
-#{require "asciidoctor"; Asciidoctor::Stylesheets.instance.primary_stylesheet_data}
+#{
+  require "asciidoctor"
+  Asciidoctor::Stylesheets.instance.primary_stylesheet_data
+}
