@@ -12,8 +12,6 @@ WARNING: Edward is still unstable and being actively worked on
 
 == Getting started
 
-(wip, not published yet)
-
 [,console]
 ----
 $ gem install mr-edward
