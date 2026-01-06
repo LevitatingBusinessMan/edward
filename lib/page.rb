@@ -43,7 +43,7 @@ module Edward
     def add_layout name
       layout_path = "_layouts/#{name}.slim"
       yaml, content = Page.extract_front_matter(File.read(layout_path))
-      @yaml = yaml.deep_merge!(@yaml, knockout_prefix: "--")
+      @yaml = yaml.deep_merge!(@yaml, knockout_prefix: "--") if yaml
       inner_template = @template
       inner_block = @block
       @block = proc { inner_template.render(Edward::RenderContext.new(self), nil, &inner_block) }
