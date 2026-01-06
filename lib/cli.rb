@@ -5,11 +5,17 @@ module Edward
     end
     
     def main
-      @builder.start
-      serve if ARGV.first == "serve"
-      init if ARGV.first == "init"
+      case ARGV.first
+      when "serve" then serve
+      when "init" then init
+      else build
+      end
     end
   
+    def build
+      @builder.start
+    end
+    
     def serve
       require "webrick"
       port = ARGV[1] ? ARGV[1].to_i : 3000
