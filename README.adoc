@@ -44,3 +44,27 @@ body {
   background-color: #{local[:background_color]};
 }
 ----
+
+== Standalone asciidoc
+
+[,adoc]
+----
+---
+# index.html.adoc
+options:
+  standalone: true
+  safe: :unsafe
+---
+:linkcss:
+:stylesdir: css
+
+= My Website
+----
+
+[,css]
+----
+---
+# css/asciidoctor.css.str
+---
+#{require "asciidoctor"; Asciidoctor::Stylesheets.instance.primary_stylesheet_data}
+----
