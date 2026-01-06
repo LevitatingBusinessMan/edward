@@ -1,6 +1,8 @@
+require_relative "lib/edward"
+
 Gem::Specification.new do |s|
   s.name        = "mr-edward"
-  s.version     = "0.0.1"
+  s.version     = Edward::VERSION
   s.summary     = "Statis site generator"
   s.authors     = ["Rein Fernhout"]
   s.homepage    = "https://github.com/LevitatingBusinessMan/edward"
