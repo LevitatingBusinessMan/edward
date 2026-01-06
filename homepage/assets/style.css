@@ -33,3 +33,28 @@ h2 {
 p {
   font-size: 20px;
 }
+
+/* ignore errors loll */
+pre.pygments .tok-err {
+  border: none !important;
+}
+
+.admonitionblock {
+  .title {
+    font-weight: bold;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-size: 22px;
+    margin: 10px;
+  }
+  .content {
+    font-size: 20px;
+  }
+}
+/*
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}*/

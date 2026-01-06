@@ -65,7 +65,7 @@ options:
 = My Website
 ----
 
-[,css]
+[source]
 ----
 ---
 # css/asciidoctor.css.str

@@ -1,1 +1,5 @@
-../../README.adoc
+---
+options:
+  safe: :unsafe
+---
+include::../README.adoc[]
