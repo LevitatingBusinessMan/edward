@@ -1,10 +1,11 @@
 Gem::Specification.new do |s|
-  s.name        = "edward"
+  s.name        = "mr-edward"
   s.version     = "0.0.0"
   s.summary     = "Statis site generator"
   s.authors     = ["Rein Fernhout"]
-  s.files       = ["lib/edward.rb", "lib/builder.rb"]
+  s.homepage    = "https://github.com/LevitatingBusinessMan/edward"
   s.license     = "MIT"
+  s.files       = Dir["lib/*"]
   s.executables << "edward"
   s.add_runtime_dependency("tilt", ["~> 2.6"])
   s.add_runtime_dependency("webrick", ["~> 1.9"])
