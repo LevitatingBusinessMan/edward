@@ -7,6 +7,7 @@ module Edward
     def main
       @builder.start
       serve if ARGV.include? "serve"
+      init if ARGV.include? "init"
     end
   
     def serve
@@ -30,7 +31,9 @@ module Edward
       require "fileutils"
       FileUtils.mkdir_p "_include"
       FileUtils.mkdir_p "_layouts"
-      File.write(".gitignore", "_site")
+      File.write ".gitignore", <<~END
+        _site
+      END
     end
   end
 end

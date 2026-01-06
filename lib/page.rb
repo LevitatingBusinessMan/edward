@@ -11,7 +11,7 @@ module Edward
       @block = block
       content = File.read(path)
       @yaml, @content = Page.extract_front_matter(content)
-      @template = Tilt[path].new { @content }
+      @template = Tilt[path].new(nil, nil, @yaml&.dig(:options)) { @content }
       @layout = get_layout(@yaml&.dig(:layout))
       # layout notes:
       # prob best course of action is to grab the layout frontmatter
@@ -37,7 +37,7 @@ module Edward
     
     def self.extract_front_matter content
       if content =~ YAML_FRONT_MATTER_REGEXP
-        yaml = YAML.safe_load(Regexp.last_match(1), symbolize_names: true)
+        yaml = YAML.safe_load(Regexp.last_match(1), symbolize_names: true, permitted_classes: [Symbol])
         content = Regexp.last_match.post_match
         [yaml, content]
       else
@@ -53,7 +53,7 @@ module Edward
     
     # the name of the new file
     def new_name
-      "#{File.basename(@path, ".*")}.html"
+      "#{File.basename(@path, ".*")}"
     end
     
     def dirname
