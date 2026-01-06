@@ -13,7 +13,7 @@ module Edward
       content = File.read(path)
       @yaml, @content = Page.extract_front_matter(content)
       @block = nil
-      @template = Tilt[path].new(nil, nil, self[:options]) { @content }
+      @template = Tilt[path].new(self[:options]) { @content }
       add_layout(self[:layout]) if self[:layout]
     end
     
@@ -44,7 +44,7 @@ module Edward
       inner_template = @template
       inner_block = @block
       @block = proc { inner_template.render(Edward::RenderContext.new(self), nil, &inner_block) }
-      @template = Tilt[layout_path].new(nil, nil, self[:options]) { content }
+      @template = Tilt[layout_path].new(self[:options]) { content }
     end
     
     def name
