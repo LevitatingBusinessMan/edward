@@ -51,9 +51,13 @@ module Edward
       end
     end
     
+    def name
+      File.basename(@path)
+    end
+    
     # the name of the new file
     def new_name
-      "#{File.basename(@path, ".*")}"
+      File.basename(@path, ".*")
     end
     
     def dirname

@@ -1,0 +1,3 @@
+---
+---
+#{require "asciidoctor"; Asciidoctor::Stylesheets.instance.primary_stylesheet_data}

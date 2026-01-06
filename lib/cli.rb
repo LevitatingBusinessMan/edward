@@ -6,13 +6,14 @@ module Edward
     
     def main
       @builder.start
-      serve if ARGV.include? "serve"
-      init if ARGV.include? "init"
+      serve if ARGV.first == "serve"
+      init if ARGV.first == "init"
     end
   
     def serve
       require "webrick"
-      @server = WEBrick::HTTPServer.new :Port => 3000, :DocumentRoot => @builder.target
+      port = ARGV[1] ? ARGV[1].to_i : 3000
+      @server = WEBrick::HTTPServer.new :Port => port, :DocumentRoot => @builder.target
       trap("INT") { @server.shutdown }
       listen
       puts "visit edward at http://127.0.0.1:#{@server.config[:Port]}"
