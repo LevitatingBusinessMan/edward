@@ -3,8 +3,7 @@ html
   head
     title = @page[:title]
     link rel="stylesheet" href="assets/style.css"
+    link rel="stylesheet" href="assets/pygments.css"
     ruby:
-      require "pygments"
-      require "asciidoctor"
-    style == Asciidoctor::SyntaxHighlighter.for('pygments').read_stylesheet('default')
+      
 body == yield

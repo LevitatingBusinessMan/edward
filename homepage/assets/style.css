@@ -23,6 +23,13 @@ pre {
   background: #cec1b7;
   padding: 10px;
   border-radius: 3px;
+  font-size: 20px;
 }
 
+h2 {
+  font-size: 32px;
+}
 
+p {
+  font-size: 20px;
+}
