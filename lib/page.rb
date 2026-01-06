@@ -15,9 +15,6 @@ module Edward
       @block = nil
       @template = Tilt[path].new(nil, nil, self[:options]) { @content }
       add_layout(self[:layout]) if self[:layout]
-      # layout notes:
-      # prob best course of action is to grab the layout frontmatter
-      # merge it with the page's frontmatter, and then add the template to a stack
     end
     
     # check if a file starts with yaml doc and can be mapped by tilt
