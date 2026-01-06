@@ -34,7 +34,7 @@ module Edward
         page = Edward::Page.new(path)
         puts "converting #{page.path} => #{page.dirname}/#{page.new_name}"
         FileUtils.mkdir_p "#{@target}/#{page.dirname}"
-        File.write("#{@target}/#{page.new_path}", page.convert)
+        File.write("#{@target}/#{page.new_path}", page.render)
       else
         copy_plain path
       end

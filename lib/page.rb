@@ -1,3 +1,5 @@
+require "deep_merge"
+
 module Edward
   # represents a file that may be converted
   class Page
@@ -5,14 +7,14 @@ module Edward
 
     attr_reader :path, :layout, :yaml
 
-    def initialize path, locals = {}, &block
+    def initialize path, locals = {}
       @path = path
       @locals = locals || {}
-      @block = block
       content = File.read(path)
       @yaml, @content = Page.extract_front_matter(content)
-      @template = Tilt[path].new(nil, nil, @yaml&.dig(:options)) { @content }
-      @layout = get_layout(@yaml&.dig(:layout))
+      @block = nil
+      @template = Tilt[path].new(nil, nil, self[:options]) { @content }
+      add_layout(self[:layout]) if self[:layout]
       # layout notes:
       # prob best course of action is to grab the layout frontmatter
       # merge it with the page's frontmatter, and then add the template to a stack
@@ -24,15 +26,7 @@ module Edward
     end
 
     def render
-      @template.render(Edward::RenderContext.new(self), { local: @locals }, &@block)
-    end
-
-    def convert
-      if @layout
-        @layout.convert
-      else
-        render
-      end
+      @template.render(Edward::RenderContext.new(self), nil, &@block)
     end
     
     def self.extract_front_matter content
@@ -45,10 +39,15 @@ module Edward
       end
     end
     
-    def get_layout name
-      if File.exist? "_layouts/#{name}.slim"
-        Page.new("_layouts/#{name}.slim", @yaml&.dig(:locals)) { render }
-      end
+    # wrap this page in a layout
+    def add_layout name
+      layout_path = "_layouts/#{name}.slim"
+      yaml, content = Page.extract_front_matter(File.read(layout_path))
+      @yaml = yaml.deep_merge!(@yaml, knockout_prefix: "--")
+      inner_template = @template
+      inner_block = @block
+      @block = proc { inner_template.render(Edward::RenderContext.new(self), nil, &inner_block) }
+      @template = Tilt[layout_path].new(nil, nil, self[:options]) { content }
     end
     
     def name
