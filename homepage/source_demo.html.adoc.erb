@@ -8,11 +8,11 @@ options:
 
 This page displays its own source. As you can see it is made by using Ruby string interpolation within AsciiDoc.
 
-#{
+<%=
   <<~END
   [%linenums,adoc]
   ----
   #{ File.read(@page.path) }
   ----
   END
-}
+%>
