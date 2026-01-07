@@ -26,7 +26,7 @@ module Edward
     def visit_file? path
       File.file?(path) &&
       !path.start_with?("_") &&
-      !["Gemfile", "Gemfile.lock"].include?(path) &&
+      !["Gemfile", "Gemfile.lock", "Rakefile"].include?(path) &&
       !@gitignore.include?(path) &&
       !@edwardignore.include?(path)
     end
