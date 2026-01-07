@@ -11,6 +11,7 @@ module Edward
     def initialize
       @target = "_site"
       @gitignore = File.read(".gitignore").lines rescue []
+      @edwardignore = File.read(".edwardignore").lines rescue []
     end
     
     def start
@@ -26,7 +27,8 @@ module Edward
       File.file?(path) &&
       !path.start_with?("_") &&
       !["Gemfile", "Gemfile.lock"].include?(path) &&
-      !@gitignore.include?(path)
+      !@gitignore.include?(path) &&
+      !@edwardignore.include?(path)
     end
 
     def visit_file path
