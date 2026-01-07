@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-$:.unshift "#{__dir__}/../lib"
+$:.unshift "#{__dir__}/../src"
 
 require 'edward'
 Edward::CLI.new.main

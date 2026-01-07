@@ -1,4 +1,4 @@
-require_relative "lib/edward"
+require_relative "src/edward"
 
 Gem::Specification.new do |s|
   s.name        = "mr-edward"
@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Rein Fernhout"]
   s.homepage    = "https://github.com/LevitatingBusinessMan/edward"
   s.license     = "MIT"
-  s.files       = Dir["lib/*"]
+  s.files       = Dir["src/*"]
   s.executables << "edward"
   s.add_runtime_dependency("tilt", ["~> 2.6"])
   s.add_runtime_dependency("webrick", ["~> 1.9"])
