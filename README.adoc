@@ -12,6 +12,8 @@ WARNING: Edward is still unstable and being actively worked on
 
 == Getting started
 
+WARNING: Edward currently requires Tilt from master https://github.com/jeremyevans/tilt[git]
+
 [,console]
 ----
 $ gem install mr-edward
