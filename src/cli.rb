@@ -31,6 +31,9 @@ module Edward
       require "listen"
       Listen.to('.', ignore: /_site/) { |modified, added, removed|
         puts "rebuilding"
+        if [modified, added, removed].flatten.map(&File.method(:basename)).include? "_setup.rb"
+          puts "WARNING: restart to apply changes to _setup.rb"
+        end
         @builder.start
       }.start
     end

@@ -1,5 +1,1 @@
----
-options:
-  ss: :asd
----
 include::../README.adoc[]

@@ -27,3 +27,18 @@ I personally like deploying through `rsync`:
 ----
 $ rsync -aiv --delete _site/ some_remote_server:/srv/www/example.com
 ----
+
+== Default template options
+
+To change the default template options just monkey patch the template's prepend method in your `_setup.rb`.
+
+[,ruby]
+----
+# make asciidoctor produce standalone output per default
+class Tilt::AsciidoctorTemplate
+  def prepare
+    @options[:standalone] = true if @options[:standalone].nil?
+    super
+  end
+end
+----

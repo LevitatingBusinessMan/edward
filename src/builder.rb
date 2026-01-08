@@ -14,6 +14,7 @@ module Edward
       @edwardignore = File.read(".edwardignore").lines rescue []
       Tilt.register_pipeline("adoc_erb", :templates => ["erb", "adoc"])
       Tilt::AsciidoctorTemplate.include(AsciiDoctorUnsafeByDefault)
+      load("./_setup.rb") if File.exist? "_setup.rb"
     end
 
     def start
