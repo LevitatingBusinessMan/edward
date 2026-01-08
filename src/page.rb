@@ -13,6 +13,8 @@ module Edward
       content = File.read(path)
       @yaml, @content = Page.extract_front_matter(content)
       @block = nil
+      # transform extensions from options to strings (for use in pipeline)
+      self[:options]&.transform_keys! { |k| Tilt.default_mapping.registered?(k.to_s) ? k.to_s : k }
       @template = Tilt[path].new(self[:options]) { @content }
       add_layout(self[:layout]) if self[:layout]
     end
@@ -38,7 +40,7 @@ module Edward
     
     # wrap this page in a layout
     def add_layout name
-      layout_path = "_layouts/#{name}.slim"
+      layout_path = "_layouts/#{name}"
       yaml, content = Page.extract_front_matter(File.read(layout_path))
       @yaml = yaml.deep_merge!(@yaml, knockout_prefix: "--") if yaml
       inner_template = @template

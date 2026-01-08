@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-gem "edward", path: ".."
+gem "mr-edward", path: ".."
 
 gem "slim", "~> 5.2"
 

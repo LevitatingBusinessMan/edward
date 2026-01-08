@@ -7,9 +7,9 @@ module Edward
 
     def include file, locals = {}, &block
       include_path = "_include/" + file
-      # yaml in includes is currently ignored
-      _yaml, content = Page.extract_front_matter(File.read(include_path))
-      Tilt[include_path].new(@page[:options]&.merge(fixed_locals: "(locals:)")){ content }.render(self, { local: locals }, &block)
+      yaml, content = Page.extract_front_matter(File.read(include_path))
+      options = (yaml&.dig(:options) || {}).merge(fixed_locals: "(locals:)")
+      Tilt[include_path].new(options) { content }.render(self, { local: locals }, &block)
     end
   end
 end

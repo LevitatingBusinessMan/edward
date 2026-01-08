@@ -1,0 +1,19 @@
+---
+options:
+  adoc:
+    standalone: true
+    safe: :unsafe
+---
+:source-highlighter: pygments
+= Source Demo
+
+This page displays its own source. As you can see it is made by using ERB templating within AsciiDoc.
+
+<%=
+  <<~END
+  [%linenums,adoc]
+  ----
+  #{ File.read(@page.path) }
+  ----
+  END
+%>

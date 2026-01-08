@@ -5,15 +5,16 @@ require "tilt"
 module Edward
   # Builds a website
   class Builder
-    
+
     attr_reader :target
-    
+
     def initialize
       @target = "_site"
       @gitignore = File.read(".gitignore").lines rescue []
       @edwardignore = File.read(".edwardignore").lines rescue []
+      Tilt.register_pipeline("adoc_erb", :templates => ["erb", "adoc"])
     end
-    
+
     def start
       FileUtils.rm_r @target if File.exist? @target
       FileUtils.mkdir_p @target

@@ -22,6 +22,7 @@ module Edward
       @server = WEBrick::HTTPServer.new :Port => port, :DocumentRoot => @builder.target
       trap("INT") { @server.shutdown }
       listen
+      @builder.start
       puts "visit edward at http://127.0.0.1:#{@server.config[:Port]}"
       @server.start
     end
