@@ -1,9 +1,12 @@
 ---
 layout: default.slim
 title: Edward Tips
+options:
+  safe: :unsafe
 ---
 :showtitle:
 :sectanchors:
+:source-highlighter: pygments
 
 [.center]
 = Tips for Edward
@@ -12,6 +15,17 @@ title: Edward Tips
 In standalone mode AsciiDoc will create a footer with the current time.
 Because Edward recreates the file during each build, this updates the timestamp each time.
 To better reflect the actual files modification date, you may use ERB to update the `docdatetime` attribute.
-```adoc
+
+[,adoc]
+----
 :docdatetime: <%= File.mtime(@page.path) %>
-```
+----
+
+== Deploying websites
+
+I personally like deploying through `rsync`:
+
+[,console]
+----
+$ rsync -aiv --delete _site/ some_remote_server:/srv/www/example.com
+----
