@@ -1,7 +1,7 @@
 body {
-  background-color: #ffd289;
-  margin-left: 20%;
-  margin-right: 20%;
+  background-color: #ffe8bb;
+  margin-left: 30%;
+  margin-right: 30%;
 }
 
 .center {
@@ -15,12 +15,12 @@ body {
   font-family: serif;
 }
 
-
 pre {
   line-height: 1.45;
   text-rendering: optimizeSpeed;
   white-space: pre-wrap;
-  background: #cec1b7;
+  background: #2b2520;
+  color: #d4c5b9;
   padding: 10px;
   border-radius: 3px;
   font-size: 20px;
@@ -41,6 +41,8 @@ p {
 /* ignore errors loll */
 pre.pygments .tok-err {
   border: none !important;
+  background-color: inherit !important;
+  color: inherit !important;
 }
 
 .admonitionblock {
@@ -55,6 +57,26 @@ pre.pygments .tok-err {
     font-size: 20px;
   }
 }
+a.anchor {
+  position: absolute;
+  margin-left: -1.5ex;
+  width: 1.5ex;
+  text-align: center;
+  text-decoration: none;
+  visibility: hidden;
+
+  &::before {
+    content: "\00A7";
+    font-size: 0.85em;
+  }
+}
+
+:hover > a.anchor,
+a.anchor:hover {
+  visibility: visible;
+}
+
+
 /*
 .admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
 .admonitionblock>table td.icon{text-align:center;width:80px}

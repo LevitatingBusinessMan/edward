@@ -1,0 +1,17 @@
+---
+layout: default.slim
+title: Edward Tips
+---
+:showtitle:
+:sectanchors:
+
+[.center]
+= Tips for Edward
+
+== File modification date in AsciiDoc
+In standalone mode AsciiDoc will create a footer with the current time.
+Because Edward recreates the file during each build, this updates the timestamp each time.
+To better reflect the actual files modification date, you may use ERB to update the `docdatetime` attribute.
+```adoc
+:docdatetime: <%= File.mtime(@page.path) %>
+```
