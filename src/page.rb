@@ -13,10 +13,14 @@ module Edward
       content = File.read(path)
       @yaml, @content = Page.extract_front_matter(content)
       @block = nil
-      # transform extensions from options to strings (for use in pipeline)
-      self[:options]&.transform_keys! { |k| Tilt.default_mapping.registered?(k.to_s) ? k.to_s : k }
+      transform_option_keys(self[:options])
       @template = Tilt[path].new(self[:options]) { @content }
       add_layout(self[:layout]) if self[:layout]
+    end
+    
+    # transform extensions from options to strings (for use in pipeline)
+    def transform_option_keys options
+      options&.transform_keys! { |k| Tilt.default_mapping.registered?(k.to_s) ? k.to_s : k }
     end
     
     # check if a file starts with yaml doc and can be mapped by tilt
@@ -43,6 +47,7 @@ module Edward
       layout_path = "_layouts/#{name}"
       yaml, content = Page.extract_front_matter(File.read(layout_path))
       @yaml = yaml.deep_merge!(@yaml, knockout_prefix: "--") if yaml
+      transform_option_keys(self[:options])
       inner_template = @template
       inner_block = @block
       @block = proc { inner_template.render(Edward::RenderContext.new(self), nil, &inner_block) }
