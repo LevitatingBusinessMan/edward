@@ -13,6 +13,7 @@ module Edward
       @gitignore = File.read(".gitignore").lines rescue []
       @edwardignore = File.read(".edwardignore").lines rescue []
       Tilt.register_pipeline("adoc_erb", :templates => ["erb", "adoc"])
+      Tilt::AsciidoctorTemplate.include(AsciiDoctorUnsafeByDefault)
     end
 
     def start
@@ -49,5 +50,12 @@ module Edward
       FileUtils.cp path, "#{@target}/#{path}"
     end
 
+  end
+end
+
+module AsciiDoctorUnsafeByDefault
+  def prepare
+    @options[:safe] = :unsafe if @options[:safe].nil?
+    super
   end
 end

@@ -1,5 +1,5 @@
 ---
 options:
-  safe: :unsafe
+  ss: :asd
 ---
 include::../README.adoc[]

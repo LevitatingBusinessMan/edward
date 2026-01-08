@@ -1,8 +1,6 @@
 ---
 layout: default.slim
 title: Edward Tips
-options:
-  safe: :unsafe
 ---
 :showtitle:
 :sectanchors:
