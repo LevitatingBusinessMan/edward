@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.license     = "MIT"
   s.files       = Dir["src/*"]
   s.executables << "edward"
-  s.add_runtime_dependency("tilt", ["~> 2.6"])
+  s.add_runtime_dependency("tilt", ["~> 2.7"])
   s.add_runtime_dependency("webrick", ["~> 1.9"])
   s.add_runtime_dependency("listen", ["~> 3.9"])
   s.add_runtime_dependency("deep_merge", ["~> 1.2"])
