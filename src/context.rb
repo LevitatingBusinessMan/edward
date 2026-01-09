@@ -5,6 +5,12 @@ module Edward
       @page = page
     end
 
+    # Include a partial file.
+    # The file is searched for in _include,
+    # rendered and returned.
+    # 
+    # If you need to include a file plainly consider
+    # just using File.read or use an ERB template.
     def include file, locals = {}, &block
       include_path = "_include/" + file
       yaml, content = Page.extract_front_matter(File.read(include_path))
