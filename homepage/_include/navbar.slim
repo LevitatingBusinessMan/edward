@@ -1,0 +1,4 @@
+#navbar
+  ul
+    - for page in pages_with_tag("navbar")
+      li: a[href=page.href]=page[:navbar_title]

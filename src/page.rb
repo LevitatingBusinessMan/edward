@@ -28,8 +28,9 @@ module Edward
       !Tilt.templates_for(path).empty? && YAML_FRONT_MATTER_REGEXP.match(File.read(path))
     end
 
-    def render
-      @template.render(Edward::RenderContext.new(self), nil, &@block)
+    def render builder
+      ctx = Edward::RenderContext.new(self, builder)
+      @template.render(ctx, nil, &proc { @block.call(ctx) })
     end
     
     def self.extract_front_matter content
@@ -50,7 +51,7 @@ module Edward
       transform_option_keys(self[:options])
       inner_template = @template
       inner_block = @block
-      @block = proc { inner_template.render(Edward::RenderContext.new(self), nil, &inner_block) }
+      @block = proc { |ctx| inner_template.render(ctx, nil, &inner_block) }
       @template = Tilt[layout_path].new(self[:options]) { content }
     end
     
@@ -69,6 +70,16 @@ module Edward
     
     def new_path
       "#{dirname}/#{new_name}"
+    end
+    
+    # The directory name if new_name is index.html.
+    # Otherwise the full new path.
+    def href
+      if new_name == "index.html"
+        dirname
+      else
+        "#{dirname}/#{new_name}"
+      end
     end
     
     def tag? tag

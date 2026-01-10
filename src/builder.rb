@@ -6,7 +6,7 @@ module Edward
   # Builds a website
   class Builder
 
-    attr_reader :target
+    attr_reader :target, :pages
 
     def initialize
       @target = "_site"
@@ -21,9 +21,14 @@ module Edward
       FileUtils.rm_r @target if File.exist? @target
       FileUtils.mkdir_p @target
 
+      @pages = []
+
       Dir.glob("**/*") do |path|
         visit_file path if visit_file?(path)
       end
+
+      write_pages
+
     end
     
     def visit_file? path
@@ -37,11 +42,17 @@ module Edward
     def visit_file path
       if Page.page?(path)
         page = Edward::Page.new(path)
-        puts "converting #{page.path} => #{page.dirname}/#{page.new_name}"
+        @pages << page
         FileUtils.mkdir_p "#{@target}/#{page.dirname}"
-        File.write("#{@target}/#{page.new_path}", page.render)
       else
         copy_plain path
+      end
+    end
+
+    def write_pages
+      for page in @pages
+        puts "converting #{page.path} => #{page.dirname}/#{page.new_name}"
+        File.write("#{@target}/#{page.new_path}", page.render(self))
       end
     end
 

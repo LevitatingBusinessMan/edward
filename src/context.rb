@@ -1,10 +1,16 @@
 module Edward
-  # Context for a template to run in
+  # Context for a template to run in.
+  # It has a reference to its page and the builder.
   class RenderContext
-    def initialize page
+    def initialize page, builder
       @page = page
+      @pages = builder.pages
     end
 
+    def pages_with_tag tag
+      @pages.filter { it.tag? tag }
+    end
+    
     # Include a partial file.
     # The file is searched for in _include,
     # rendered and returned.
@@ -14,7 +20,7 @@ module Edward
     def include file, locals = {}, &block
       include_path = "_include/" + file
       yaml, content = Page.extract_front_matter(File.read(include_path))
-      options = (yaml&.dig(:options) || {}).merge(fixed_locals: "(locals:)")
+      options = (yaml&.dig(:options) || {}).merge(fixed_locals: "(local:)")
       Tilt[include_path].new(options) { content }.render(self, { local: locals }, &block)
     end
   end

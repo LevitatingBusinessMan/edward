@@ -1,6 +1,8 @@
 ---
 layout: default.slim
 title: Edward Tips
+tags: navbar
+navbar_title: tips
 ---
 :showtitle:
 :sectanchors:
@@ -11,8 +13,8 @@ title: Edward Tips
 
 == File modification date in AsciiDoc
 In standalone mode AsciiDoc will create a footer with the current time.
-Because Edward recreates the file during each build, this updates the timestamp each time.
-To better reflect the actual files modification date, you may use ERB to update the `docdatetime` attribute.
+Because Edward recreates the file during each build, the timestamp is updated each time.
+You may use ERB to set the doctitle to the files modification date instead.
 
 [,adoc]
 ----
