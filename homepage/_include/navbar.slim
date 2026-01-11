@@ -1,4 +1,5 @@
 #navbar
   ul
-    - for page in pages_with_tag("navbar")
+    - for page in pages_with_tag("navbar").sort_by { it[:navbar_title] }
       li: a[href=page.href]=page[:navbar_title]
+    li: a href="https://github.com/LevitatingBusinessMan/edward/" github

@@ -20,6 +20,8 @@ $ edward serve
 
 == Layouts
 
+You may place layouts in `_layouts`. Layouts call `yield` to get their inner content.
+
 [,slim]
 ----
 // _layouts/default.slim
@@ -31,7 +33,27 @@ html
   body == yield
 ----
 
-== Include
+Layouts may optionally use <<_front_matter>>.
+
+Layouts may be nested. Just use another `layout` attribute in your layout.
+
+[,slim]
+----
+---
+# _layouts/post.slim
+layout: default.slim
+title: <%= @page[:post, :title] %>
+tags: [post]
+---
+  h1#title = @page[:post. :title]
+  span#date = @page[:post, :date]
+  .post_content == yield
+----
+
+== Partials
+
+You may place partials in `_include/`.
+
 [,css]
 ----
 /* _include/style.css.str */
@@ -72,3 +94,14 @@ options:
   Asciidoctor::Stylesheets.instance.primary_stylesheet_data
 %>
 ----
+
+== Front Matter
+
+The https://yaml.org/[YAML] front matter has the be placed at the start of the file and surrounded by 2 lines containing 3 dashes (`---`).
+The following attributes are understood by Edward:
+
+* `layout`: Use a layout found in `_layouts/`. This attribute is not shared between files. See also <<layouts>>.
+* `options`: Options to be passed to the templating engine. This attribute is not shared between files. See also <<pipelines>>.
+* `tags`: For use in a few built-in helpers. See <<tags>>.
+
+All other attributes may be used freely.
