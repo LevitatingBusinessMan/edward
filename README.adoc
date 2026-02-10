@@ -1,5 +1,10 @@
 :source-highlighter: pygments
 
+// match github
+:idprefix:
+:idseparator: -
+
+
 = Edward, a simple robust static site generator for Ruby
 
 Edward is inspired by Jekyll (Edward Hyde is the name of Dr Jekyll's alter ego). However, Edward uses Tilt for templating instead of Liquid. The freedom provided by Tilt as well as Edwards simplicity create a very powerful environment.
@@ -33,7 +38,7 @@ html
   body == yield
 ----
 
-Layouts may optionally use <<_front_matter>>.
+Layouts may optionally use <<front-matter>>.
 
 Layouts may be nested. Just use another `layout` attribute in your layout.
 
