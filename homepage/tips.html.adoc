@@ -27,7 +27,7 @@ I personally like deploying through `rsync`:
 
 [,console]
 ----
-$ rsync -aiv --delete _site/ some_remote_server:/srv/www/example.com
+$ rsync -aicv --delete _site/ some_remote_server:/srv/www/example.com
 ----
 
 == Default template options
