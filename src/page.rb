@@ -17,12 +17,12 @@ module Edward
       @template = Tilt[path].new(self[:options]) { @content }
       add_layout(self[:layout]) if self[:layout]
     end
-    
+
     # transform extensions from options to strings (for use in pipeline)
     def transform_option_keys options
       options&.transform_keys! { |k| Tilt.default_mapping.registered?(k.to_s) ? k.to_s : k }
     end
-    
+
     # check if a file starts with yaml doc and can be mapped by tilt
     def self.page? path
       !Tilt.templates_for(path).empty? && YAML_FRONT_MATTER_REGEXP.match(File.read(path))
@@ -32,7 +32,7 @@ module Edward
       ctx = Edward::RenderContext.new(self, builder)
       @template.render(ctx, nil, &proc { @block.call(ctx) })
     end
-    
+
     def self.extract_front_matter content
       if content =~ YAML_FRONT_MATTER_REGEXP
         yaml = YAML.safe_load(Regexp.last_match(1), symbolize_names: true, permitted_classes: [Symbol])
@@ -42,7 +42,7 @@ module Edward
         [nil, content]
       end
     end
-    
+
     # wrap this page in a layout
     def add_layout name
       layout_path = "_layouts/#{name}"
@@ -54,34 +54,34 @@ module Edward
       @block = proc { |ctx| inner_template.render(ctx, nil, &inner_block) }
       @template = Tilt[layout_path].new(self[:options]) { content }
     end
-    
+
     def name
       File.basename(@path)
     end
-    
+
     # the name of the new file
     def new_name
       File.basename(@path, ".*")
     end
-    
+
     def dirname
       File.dirname(@path)
     end
-    
+
     def new_path
       "#{dirname}/#{new_name}"
     end
-    
+
     # The directory name if new_name is index.html.
     # Otherwise the full new path.
     def href
       if new_name == "index.html"
-        dirname
+         "/" + dirname
       else
-        "#{dirname}/#{new_name}"
+        "/#{dirname}/#{new_name}"
       end
     end
-    
+
     def tag? tag
       @yaml&.dig(:tags)&.include? tag
     end
@@ -89,6 +89,6 @@ module Edward
     def [](*keys)
       @yaml&.dig(*keys)
     end
-    
+
   end
 end
