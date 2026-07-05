@@ -47,12 +47,14 @@ module Edward
     def add_layout name
       layout_path = "_layouts/#{name}"
       yaml, content = Page.extract_front_matter(File.read(layout_path))
+      next_layout = yaml[:layout]
       @yaml = yaml.deep_merge!(@yaml, knockout_prefix: "--") if yaml
       transform_option_keys(self[:options])
       inner_template = @template
       inner_block = @block
       @block = proc { |ctx| inner_template.render(ctx, nil, &inner_block) }
       @template = Tilt[layout_path].new(self[:options]) { content }
+      add_layout(next_layout) if next_layout
     end
 
     def name
