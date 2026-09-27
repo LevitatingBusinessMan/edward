@@ -1,4 +1,4 @@
-# generated with rake release[0.7.1]
+# generated with rake release[0.8.0]
 module Edward
-  VERSION = "0.7.1"
+  VERSION = "0.8.0"
 end
