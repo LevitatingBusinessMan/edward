@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.license     = "MIT"
   s.files       = Dir["src/*"]
   s.executables << "edward"
+  s.required_ruby_version = ">= 4.0"
   s.add_runtime_dependency("tilt", ["~> 2.7.0"])
   s.add_runtime_dependency("webrick", ["~> 1.9"])
   s.add_runtime_dependency("listen", ["~> 3.9"])

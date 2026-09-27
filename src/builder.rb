@@ -10,9 +10,8 @@ module Edward
 
     def initialize
       @target = "_site"
-      @gitignore = File.read(".gitignore").lines rescue []
-      @edwardignore = File.read(".edwardignore").lines rescue []
-      Tilt::AsciidoctorTemplate.include(AsciiDoctorUnsafeByDefault) rescue
+      @ignored = ignore_files
+      Tilt::AsciidoctorTemplate.include(AsciiDoctorUnsafeByDefault) rescue nil
       load("./_setup.rb") if File.exist? "_setup.rb"
     end
 
@@ -29,13 +28,21 @@ module Edward
       write_pages
 
     end
-    
+
+    # generate list of ignored files
+    def ignore_files
+      (["Gemfile", "Gemfile.lock", "Rakefile"] +
+        (File.readlines(".gitignore", chomp: true) rescue []) +
+        (File.readlines(".edwardignore", chomp: true) rescue [])
+      ).reject { it.strip.empty? || it.start_with?("#") }
+       .map { it.chomp("/") }
+       .flat_map { |pattern| Dir.glob(pattern.include?("/") ? pattern.delete_prefix("/") : "**/#{pattern}") }
+    end
+
     def visit_file? path
       File.file?(path) &&
-      !path.start_with?("_") &&
-      !["Gemfile", "Gemfile.lock", "Rakefile"].include?(path) &&
-      !@gitignore.include?(path) &&
-      !@edwardignore.include?(path)
+        !path.start_with?("_") &&
+        @ignored.none? { path == it || path.start_with?("#{it}/") }
     end
 
     def visit_file path
