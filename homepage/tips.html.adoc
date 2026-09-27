@@ -55,3 +55,14 @@ For instance you may want to pre-process asciidoc with erb.
 ----
 Tilt.register_pipeline("adoc.erb")
 ----
+
+== Use _vendor during deployment
+
+When deploying you may want to use `_vendor` for vendoring dependencies.
+The `_` prefix will cause edward to ignore the directory.
+
+[,shell]
+----
+bundle config set deployment true
+bundle config set path _vendor
+----
