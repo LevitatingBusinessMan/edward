@@ -12,7 +12,7 @@ module Edward
       @target = "_site"
       @gitignore = File.read(".gitignore").lines rescue []
       @edwardignore = File.read(".edwardignore").lines rescue []
-      Tilt::AsciidoctorTemplate.include(AsciiDoctorUnsafeByDefault)
+      Tilt::AsciidoctorTemplate.include(AsciiDoctorUnsafeByDefault) rescue
       load("./_setup.rb") if File.exist? "_setup.rb"
     end
 
