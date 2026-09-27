@@ -12,7 +12,6 @@ module Edward
       @target = "_site"
       @gitignore = File.read(".gitignore").lines rescue []
       @edwardignore = File.read(".edwardignore").lines rescue []
-      Tilt.register_pipeline("adoc_erb", :templates => ["erb", "adoc"])
       Tilt::AsciidoctorTemplate.include(AsciiDoctorUnsafeByDefault)
       load("./_setup.rb") if File.exist? "_setup.rb"
     end

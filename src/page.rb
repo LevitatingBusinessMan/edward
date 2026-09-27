@@ -63,7 +63,7 @@ module Edward
 
     # the name of the new file
     def new_name
-      File.basename(@path, ".*")
+      File.basename(@path, '.' + Tilt.default_mapping.matched_extension(@path))
     end
 
     def dirname
@@ -92,5 +92,11 @@ module Edward
       @yaml&.dig(*keys)
     end
 
+  end
+end
+
+module Tilt
+  class BaseMapping
+    def matched_extension(file) = split(file).last
   end
 end

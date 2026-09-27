@@ -44,3 +44,14 @@ class Tilt::AsciidoctorTemplate
   end
 end
 ----
+
+== Using layered templates
+
+If you want to use templating engines in sequence you can use `_setup.rb` to register it as a pipeline.
+
+For instance you may want to pre-process asciidoc with erb.
+
+[,ruby]
+----
+Tilt.register_pipeline("adoc.erb")
+----
